@@ -101,9 +101,10 @@ def update_daily_graph(country_value, type_value):
     df = query_country(country, options)
 
     # bar chart with daily cases
-    fig_daily = px.line(df, x="date", y="cases", color='type')
+    fig = px.line(df, x="date", y="cases", color='type', template='simple_white')
+    fig.update_layout(showlegend=False)
 
-    return fig_daily
+    return fig
 
 
 @app.callback(
@@ -117,8 +118,10 @@ def update_daily_cum(country_value, type_value):
     df = query_country(country, options)
 
     # bar chart with daily cases
-    fig_daily_cum = px.line(df, x="date", y="cases", color='type')
-    return fig_daily_cum
+    fig = px.line(df, x="date", y="cases", color='type', template='simple_white')
+    fig.update_layout(showlegend=False)
+
+    return fig
 
 
 if __name__ == '__main__':
