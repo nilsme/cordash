@@ -10,7 +10,6 @@ import psycopg2
 
 
 def query_db(query):
-
     conn = None
 
     try:
@@ -79,14 +78,16 @@ app.layout = html.Div([
                 {'label': 'recovered', 'value': 'recovered'},
                 {'label': 'death', 'value': 'death'}],
             value=['confirmed', 'recovered', 'death'])
-        ], style={'width': '20%', 'float': 'left', 'display': 'inline-block'}),
+    ], style={'width': '20%', 'float': 'left', 'display': 'inline-block'}),
 
-        html.Div([
-            dcc.Graph(id='daily-cases-graph'),
-        ], style={'width': '40', 'float': 'center', 'display': 'inline-block'}),
-        html.Div([
-            dcc.Graph(id='daily-cases-cum-graph')
-        ], style={'width': '40', 'float': 'center', 'display': 'inline-block'})
+    html.Div([
+        dcc.Graph(id='daily-cases-graph',
+                  responsive=True)
+    ], style={'width': '40%', 'float': 'center', 'display': 'inline-block'}),
+    html.Div([
+        dcc.Graph(id='daily-cases-cum-graph',
+                  responsive=True)
+    ], style={'width': '40%', 'float': 'right', 'display': 'inline-block'})
 ])
 
 
