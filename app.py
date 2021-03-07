@@ -56,30 +56,37 @@ external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 # set app layout
-app.layout = html.Div(children=[
-    html.H1(children='Corona Dash'),
+app.layout = html.Div([
 
-    html.Div(children='''
+    html.Div([
+        html.H1(children='Corona Dash'),
+
+        html.Div(children='''
         A dashboard with corona data.
-    '''),
+        '''),
 
-    html.Label('Country'),
-    dcc.Dropdown(
-        id='country-dropdown',
-        options=list_countries,
-        value='Germany'),
-    html.Label('Tpye'),
-    dcc.Checklist(
-        id='type-checkbox',
-        options=[
-            {'label': 'confirmed', 'value': 'confirmed'},
-            {'label': 'recovered', 'value': 'recovered'},
-            {'label': 'death', 'value': 'death'}
-        ],
-        value=['confirmed', 'recovered', 'death']),
-    dcc.Graph(id='daily-cases-graph'),
-    dcc.Graph(id='daily-cases-cum-graph')
+        html.Label('Country'),
 
+        dcc.Dropdown(
+            id='country-dropdown',
+            options=list_countries,
+            value='Germany'),
+        html.Label('Tpye'),
+        dcc.Checklist(
+            id='type-checkbox',
+            options=[
+                {'label': 'confirmed', 'value': 'confirmed'},
+                {'label': 'recovered', 'value': 'recovered'},
+                {'label': 'death', 'value': 'death'}],
+            value=['confirmed', 'recovered', 'death'])
+        ], style={'width': '20%', 'float': 'left', 'display': 'inline-block'}),
+
+        html.Div([
+            dcc.Graph(id='daily-cases-graph'),
+        ], style={'width': '40', 'float': 'center', 'display': 'inline-block'}),
+        html.Div([
+            dcc.Graph(id='daily-cases-cum-graph')
+        ], style={'width': '40', 'float': 'center', 'display': 'inline-block'})
 ])
 
 
