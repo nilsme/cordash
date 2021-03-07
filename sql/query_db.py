@@ -6,13 +6,13 @@ from sql_queries import *
 
 
 def execute_query(query):
-
     conn = psycopg2.connect("host=127.0.0.1 dbname=postgres user=postgres password=postgres")
     conn.set_session(autocommit=True)
     cur = conn.cursor()
 
     cur.execute(query)
 
+    # noinspection PyBroadException
     try:
         rows = cur.fetchall()
         for row in rows:
