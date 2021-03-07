@@ -67,8 +67,7 @@ app.layout = html.Div(children=[
     dcc.Dropdown(
         id='country-dropdown',
         options=list_countries,
-        value='Germany'
-    ),
+        value='Germany'),
     html.Label('Tpye'),
     dcc.Checklist(
         id='type-checkbox',
@@ -77,12 +76,11 @@ app.layout = html.Div(children=[
             {'label': 'recovered', 'value': 'recovered'},
             {'label': 'death', 'value': 'death'}
         ],
-        value=['confirmed', 'recovered', 'death']
-    ),
+        value=['confirmed', 'recovered', 'death']),
     dcc.Graph(id='daily-cases-graph'),
     dcc.Graph(id='daily-cases-cum-graph')
 
-], style={'columnCount': 3})
+])
 
 
 @app.callback(
