@@ -60,12 +60,11 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 # set app layout
 app.layout = html.Div([
 
-    html.Div([
-        html.H1(children='Corona Dash'),
-        html.Div(children='''
-        A dashboard with corona data.
-        '''),
+    html.H1(children='Corona Dash'),
+    html.Div(children=html.P('''A dashboard with corona data.''')),
 
+    html.Div([
+        html.H3('Settings'),
         html.Label('Country'),
         dcc.Dropdown(
             id='country-dropdown',
