@@ -10,6 +10,13 @@ import psycopg2
 
 
 def query_db(query):
+    """
+    Query the default postgres database and assign the result to a pandas data
+    frame.
+
+    :param query: (string) SQL query
+    :return: A pandas data frame.
+    """
     conn = None
 
     try:
@@ -29,11 +36,21 @@ def query_db(query):
 
 
 def query_country(country, options):
+    """
+    Set up a query for a given country and a list of options.
+
+    :param country: (string)
+    :param options: (list)
+    :return: A pandas data frame.
+    """
     df = pd.DataFrame()
 
     for option in options:
-        query = f"""SELECT date, type, cases, sum(cases) OVER (ORDER BY date, type) as ccases FROM coronavirus \
-                    WHERE (country = '{country}' AND cases > 0 AND type = '{option}');"""
+        query = f"""SELECT date, type, cases, sum(cases) \
+                    OVER (ORDER BY date, type) as ccases FROM coronavirus \
+                    WHERE (country = '{country}' \
+                    AND cases > 0 \
+                    AND type = '{option}');"""
 
         df_option = query_db(query)
         df = df_option.append(df, ignore_index=True)
@@ -46,6 +63,11 @@ def query_country(country, options):
 
 
 def country_list():
+    """
+    Query the default postgres database for a distinct list of countries.
+
+    :return: A pandas data frame.
+    """
     df = query_db("SELECT DISTINCT country FROM coronavirus;")
     df = df.sort_values(by=['country'])
     return df
@@ -99,6 +121,13 @@ app.layout = html.Div([
     Input('country-dropdown', 'value'),
     Input('type-checkbox', 'value'))
 def update_daily_graph(country_value, type_value):
+    """
+    Update the daily new cases plot.
+
+    :param country_value: (string) Provided via settings.
+    :param type_value: (string) Provided via settings.
+    :return: Plotly figure
+    """
     country = country_value
     options = type_value
 
@@ -119,6 +148,13 @@ def update_daily_graph(country_value, type_value):
     Input('country-dropdown', 'value'),
     Input('type-checkbox', 'value'))
 def update_daily_csum(country_value, type_value):
+    """
+    Update the daily cumulated cases plot.
+
+    :param country_value: (string) Provided via settings.
+    :param type_value: (string) Provided via settings.
+    :return: Plotly figure
+    """
     country = country_value
     options = type_value
 

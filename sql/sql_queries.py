@@ -1,5 +1,6 @@
 coronavirus_table_create = ("""
                             CREATE TABLE IF NOT EXISTS coronavirus (
+                            id SERIAL NOT NULL PRIMARY KEY,
                             date DATE,
                             province VARCHAR,
                             country VARCHAR,

@@ -6,6 +6,11 @@ import sys
 
 
 def main():
+    """
+    Test connection to postgres DB
+
+    :return: String with postgres DB version.
+    """
 
     conn = None
 
